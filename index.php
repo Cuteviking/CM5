@@ -7,7 +7,7 @@
 
 <body>
 	<form action="php/search.php" method="get" id="search">
-    	Name or Champ<input type="text">
+    	Name or Champ<input name="q" type="text">
     </form>
 </body>
 </html>
