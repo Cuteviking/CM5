@@ -5,11 +5,35 @@
 	$query = $_GET["return"];
 	$type = $_GET["type"];
 	
+	//champ CM player
+	$average = json_decode(file_get_contents("php/results.json"), true);
+	
+	
+	//borde vara i js ist 
 	if($type == "sum"){
-		$sumIdRequest = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/".$query."?api_key=".$key), true);
-		$sumChampList = json_decode(file_get_contents("https://euw.api.pvp.net/championmastery/location/EUW1/player/".$query."/champions?api_key=".$key), true);
-		$sumPoints = json_decode(file_get_contents("https://euw.api.pvp.net/championmastery/location/EUW1/player/".$query."/score?api_key=".$key), true);
+		//query
+		$sumIdRequest = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.4/summoner/".$query."?api_key=".$key), true);//sum
+		$sumChampList = json_decode(file_get_contents("https://euw.api.pvp.net/championmastery/location/EUW1/player/".$query."/topchampions?api_key=".$key), true);//top champs
+		$sumPoints = json_decode(file_get_contents("https://euw.api.pvp.net/championmastery/location/EUW1/player/".$query."/score?api_key=".$key), true);//cm lvl
+		//$sumStats = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.3/stats/by-summoner/".$query."/ranked?season=SEASON2016&api_key=".$key), true);
 		
+		//average
+		$avarageStatsChamp;
+		//0 = best champ
+		for($i=0;$i<count($average[$sumChampList[0]["championId"]][$sumChampList[0]["championLevel"]]);$i++){//count($average[$sumChampList[0]["championId"]][$sumChampList[0]["championLevel"]])
+			sleep(1);
+			$averageStats = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.3/stats/by-summoner/".$average[$sumChampList[0]["championId"]][$sumChampList[0]["championLevel"]][$i]["playerId"]."/ranked?season=SEASON2016&api_key=".$key), true);
+
+			for($j=0;$j<count($averageStats["champions"]);$j++){
+				if($averageStats["champions"][$j]["id"] == $sumChampList[0]["championId"]){
+					$avarageStatsChamp[] = $averageStats["champions"][$j]["stats"];//stats from all the challenger players with same champs as sum ($query) with CM:5
+				}	
+			}
+		}
+		
+		echo json_encode($avarageStatsChamp);
+		echo "<br>";
+
 	}
 ?>
 
@@ -18,6 +42,7 @@
 <head>
 <meta charset="utf-8">
 <title>CM5</title>
+<script src="js/stats.js"></script>
 </head>
 
 <body>
@@ -46,15 +71,16 @@
 			}
 		?>
         </div>
-    	<ul class="campList">
+    	<ul id="champList">
         <?php
         	for($i=3;$i<count($sumChampList);$i++){
-				echo "<li>".$sumChampList[$i]["championId"]."</li>";
+				echo "<li data-champ=".$sumChampList[$i]["championId"]." >".$sumChampList[$i]["championId"]."</li>";
 			}
 		?>
         </ul>
     </section>
 	<section class="champ">
+    	
     </section>
 </div>
 
