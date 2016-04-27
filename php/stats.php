@@ -26,7 +26,7 @@
 	
 	echo JSON_encode($output, JSON_PRETTY_PRINT);
 	
-	$fp = fopen('results.json', 'w');
+	$fp = fopen('json/results.json', 'w');
 	fwrite($fp, json_encode($result));
 	fclose($fp);
 	

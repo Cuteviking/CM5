@@ -71,16 +71,29 @@
 			}
 		?>
         </div>
-    	<ul id="champList">
-        <?php
-        	for($i=3;$i<count($sumChampList);$i++){
-				echo "<li data-champ=".$sumChampList[$i]["championId"]." >".$sumChampList[$i]["championId"]."</li>";
-			}
-		?>
-        </ul>
     </section>
 	<section class="champ">
-    	
+    	<ul class="list">
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+    	<ul class="list">
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+    	<ul class="list">
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
     </section>
 </div>
 
