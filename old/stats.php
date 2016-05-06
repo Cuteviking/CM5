@@ -7,7 +7,7 @@
 	 */
 		
 
-	include "key.php";
+	include "../php/key.php";
 	$statsChallenger = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v2.5/league/challenger?type=RANKED_SOLO_5x5&api_key=".$key), true);
 	
 	/*get players*/
@@ -26,9 +26,9 @@
 	
 	echo JSON_encode($output, JSON_PRETTY_PRINT);
 	
-	$fp = fopen('json/results.json', 'w');
+	/*$fp = fopen('json/results.json', 'w');
 	fwrite($fp, json_encode($result));
-	fclose($fp);
+	fclose($fp);*/
 	
 	//move this to stats.js and playerStats.php
 			//$statsChallengerChamps = json_decode(file_get_contents("https://euw.api.pvp.net/api/lol/euw/v1.3/stats/by-summoner/".$statsChallenger["entries"][$i]["playerOrTeamId"]."/ranked?season=SEASON2016&api_key=".$key), true);

@@ -6,8 +6,8 @@
 </head>
 
 <body>
-	<form action="php/search.php" method="get" id="search">
-    	Name or Champ<input name="q" type="text">
+	<form action="php/ajax/search.php" method="get" id="search">
+    	Summoner name:<input name="q" type="text">
     </form>
 </body>
 </html>

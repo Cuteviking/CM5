@@ -1,0 +1,26 @@
+.profile{
+	height: 20vh;
+	margin: 8px 0;
+}
+
+.champ{
+	float:left;
+	width:33%;
+}
+
+.champ .list{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+.champ .list li{
+	padding:2px 4px;
+	opacity:1;
+	transition: all 2s;
+}
+
+.champ .list li.hidden{
+	opacity:0;
+	
+}
